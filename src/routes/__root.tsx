@@ -73,10 +73,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "M&M — Mist & Muse | Wear Confidence" },
-      { name: "description", content: "Luxury perfumes and body mists in Kumasi, Ghana. Premium UAE-crafted fragrances. Order on WhatsApp." },
+      {
+        name: "description",
+        content:
+          "Luxury perfumes and body mists in Kumasi, Ghana. Premium UAE-crafted fragrances. Order on WhatsApp.",
+      },
       { name: "author", content: "M&M — Mist & Muse" },
       { property: "og:title", content: "M&M — Mist & Muse | Wear Confidence" },
-      { property: "og:description", content: "Luxury perfumes and body mists in Kumasi, Ghana. Order on WhatsApp." },
+      {
+        property: "og:description",
+        content: "Luxury perfumes and body mists in Kumasi, Ghana. Order on WhatsApp.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@mistandmuse" },

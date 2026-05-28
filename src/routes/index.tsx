@@ -80,14 +80,29 @@ const bodyMists: Product[] = [
 ];
 
 const designerPerfumes: Product[] = [
-  { name: "Louis Vuitton Imagination", price: 5200, badge: "Exclusive", image: "/lv-imagination.jpg" },
+  {
+    name: "Louis Vuitton Imagination",
+    price: 5200,
+    badge: "Exclusive",
+    image: "/lv-imagination.jpg",
+  },
   { name: "Dior Sauvage Elixir", price: 3800, badge: "Best Seller", image: "/sauvage-elixir.jpg" },
-  { name: "Versace Eros Energy", price: 2100, badge: "New Release", image: "/versace-eros-energy.jpg" },
+  {
+    name: "Versace Eros Energy",
+    price: 2100,
+    badge: "New Release",
+    image: "/versace-eros-energy.jpg",
+  },
   { name: "Hugo Boss Bottled Elixir", price: 2200, image: "/hugo-boss-elixir.jpg" },
   { name: "Versace Men's Eros", price: 1900, image: "/versace-eros.jpg" },
   { name: "Dolce & Gabbana Light Blue Intense", price: 1800, image: "/dg-light-blue.jpg" },
   { name: "Polo Ralph Lauren Blue", price: 1700, image: "/polo-blue.jpg" },
-  { name: "Clive Christian Collection", price: 5400, badge: "Elite Luxury", image: "/clive-christian.jpg" },
+  {
+    name: "Clive Christian Collection",
+    price: 5400,
+    badge: "Elite Luxury",
+    image: "/clive-christian.jpg",
+  },
   { name: "Louis Vuitton Pacific Chill", price: 4900, image: "/lv-collection.jpg" },
 ];
 
@@ -107,7 +122,8 @@ const DEFAULT_REVIEWS: Review[] = [
     id: "1",
     name: "Amah K.",
     rating: 5,
-    comment: "The scent of Sara Blaze is absolutely divine! It lasts all day and I get so many compliments. Ordering was super fast and easy.",
+    comment:
+      "The scent of Sara Blaze is absolutely divine! It lasts all day and I get so many compliments. Ordering was super fast and easy.",
     productName: "Sara Blaze",
     date: "May 12, 2026",
     verified: true,
@@ -117,7 +133,8 @@ const DEFAULT_REVIEWS: Review[] = [
     id: "2",
     name: "Kofi A.",
     rating: 5,
-    comment: "Suave is incredibly close to Sauvage but at an unbeatable price point. Lasts 8+ hours on my clothes. 10/10!",
+    comment:
+      "Suave is incredibly close to Sauvage but at an unbeatable price point. Lasts 8+ hours on my clothes. 10/10!",
     productName: "Suave",
     date: "May 20, 2026",
     verified: true,
@@ -127,7 +144,8 @@ const DEFAULT_REVIEWS: Review[] = [
     id: "3",
     name: "Esi B.",
     rating: 4,
-    comment: "Elysia Pista Sundae is so creamy, nutty, and sweet. Perfect gourmand perfume for everyday wear. Fast delivery in Kumasi.",
+    comment:
+      "Elysia Pista Sundae is so creamy, nutty, and sweet. Perfect gourmand perfume for everyday wear. Fast delivery in Kumasi.",
     productName: "Elysia Pista Sundae",
     date: "May 24, 2026",
     verified: true,
@@ -137,7 +155,8 @@ const DEFAULT_REVIEWS: Review[] = [
     id: "4",
     name: "Emmanuel O.",
     rating: 5,
-    comment: "Kaly Floral Majesty is a hit with my wife. Smells premium and the bottle design is very elegant.",
+    comment:
+      "Kaly Floral Majesty is a hit with my wife. Smells premium and the bottle design is very elegant.",
     productName: "Kaly Floral Majesty",
     date: "May 26, 2026",
     verified: true,
@@ -194,18 +213,19 @@ function ReviewsSection() {
   const [formSuccess, setFormSuccess] = useState(false);
 
   const totalReviews = reviews.length;
-  const averageRating = totalReviews > 0 
-    ? (reviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews).toFixed(1)
-    : "0.0";
+  const averageRating =
+    totalReviews > 0
+      ? (reviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews).toFixed(1)
+      : "0.0";
 
   const starCounts = [0, 0, 0, 0, 0]; // 1, 2, 3, 4, 5 stars
-  reviews.forEach(r => {
+  reviews.forEach((r) => {
     if (r.rating >= 1 && r.rating <= 5) {
       starCounts[r.rating - 1]++;
     }
   });
 
-  const filteredReviews = reviews.filter(r => {
+  const filteredReviews = reviews.filter((r) => {
     if (filterRating === "all") return true;
     return r.rating === filterRating;
   });
@@ -218,7 +238,7 @@ function ReviewsSection() {
   const handleLike = (id: string) => {
     if (likedReviews.includes(id)) return; // Already liked
     setLikedReviews([...likedReviews, id]);
-    setReviews(prev => prev.map(r => r.id === id ? { ...r, likes: r.likes + 1 } : r));
+    setReviews((prev) => prev.map((r) => (r.id === id ? { ...r, likes: r.likes + 1 } : r)));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -236,7 +256,20 @@ function ReviewsSection() {
       return;
     }
 
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
     const now = new Date();
     const formattedDate = `${monthNames[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
 
@@ -248,7 +281,7 @@ function ReviewsSection() {
       productName: formProduct,
       date: formattedDate,
       verified: false,
-      likes: 0
+      likes: 0,
     };
 
     setReviews([newReview, ...reviews]);
@@ -270,14 +303,17 @@ function ReviewsSection() {
 
   const allProductNames = [
     "General Shop Experience",
-    ...perfumes200.map(p => p.name),
-    ...perfumes60.map(p => p.name),
-    ...bodyMists.map(p => p.name),
-    ...designerPerfumes.map(p => p.name)
+    ...perfumes200.map((p) => p.name),
+    ...perfumes60.map((p) => p.name),
+    ...bodyMists.map((p) => p.name),
+    ...designerPerfumes.map((p) => p.name),
   ];
 
   return (
-    <section id="reviews" className="mx-auto max-w-7xl px-5 py-24 sm:px-8 border-t border-gold/10 bg-ink">
+    <section
+      id="reviews"
+      className="mx-auto max-w-7xl px-5 py-24 sm:px-8 border-t border-gold/10 bg-ink"
+    >
       <SectionHeader
         label="Feedback"
         title="Customer Ratings"
@@ -293,7 +329,7 @@ function ReviewsSection() {
               <span className="font-serif text-5xl font-bold text-cream">{averageRating}</span>
               <span className="text-sm text-cream-muted/60">out of 5</span>
             </div>
-            
+
             {/* Stars row */}
             <div className="mt-2 flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
@@ -316,7 +352,7 @@ function ReviewsSection() {
                 const pct = getPercentage(count);
                 return (
                   <div key={star} className="flex items-center gap-3 text-xs">
-                    <button 
+                    <button
                       onClick={() => setFilterRating(star)}
                       className="flex w-12 items-center gap-1 text-cream-muted hover:text-gold transition-colors text-left cursor-pointer"
                     >
@@ -324,7 +360,7 @@ function ReviewsSection() {
                       <Star className="h-3 w-3 fill-gold text-gold" />
                     </button>
                     <div className="h-2 flex-1 rounded-full bg-ink/80 overflow-hidden border border-gold/10">
-                      <div 
+                      <div
                         className="h-full rounded-full bg-gold transition-all duration-1000"
                         style={{ width: `${pct}%` }}
                       />
@@ -373,8 +409,10 @@ function ReviewsSection() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <h5 className="font-serif text-lg font-semibold text-gold border-b border-gold/15 pb-2">Your Feedback</h5>
-                  
+                  <h5 className="font-serif text-lg font-semibold text-gold border-b border-gold/15 pb-2">
+                    Your Feedback
+                  </h5>
+
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-wider text-cream-muted/70 mb-1">
                       Your Name
@@ -397,7 +435,7 @@ function ReviewsSection() {
                       onChange={(e) => setFormProduct(e.target.value)}
                       className="w-full rounded-xl border border-gold/20 bg-ink/75 px-4 py-2.5 text-sm text-cream focus:border-gold/60 focus:outline-none focus:ring-1 focus:ring-gold/30"
                     >
-                      {allProductNames.map(name => (
+                      {allProductNames.map((name) => (
                         <option key={name} value={name} className="bg-ink text-cream">
                           {name}
                         </option>
@@ -442,9 +480,7 @@ function ReviewsSection() {
                     />
                   </div>
 
-                  {formError && (
-                    <p className="text-xs text-red-400 font-semibold">{formError}</p>
-                  )}
+                  {formError && <p className="text-xs text-red-400 font-semibold">{formError}</p>}
 
                   <button
                     type="submit"
@@ -462,7 +498,9 @@ function ReviewsSection() {
         <div className="lg:col-span-8 space-y-6">
           {/* Filters Bar */}
           <div className="flex flex-wrap items-center gap-2 border-b border-gold/10 pb-4">
-            <span className="text-xs uppercase tracking-wider text-cream-muted/50 mr-2">Filter:</span>
+            <span className="text-xs uppercase tracking-wider text-cream-muted/50 mr-2">
+              Filter:
+            </span>
             <button
               onClick={() => setFilterRating("all")}
               className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all cursor-pointer ${
@@ -508,31 +546,36 @@ function ReviewsSection() {
                       {/* Avatar & Info */}
                       <div className="flex items-start gap-3">
                         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-gold/5 font-serif text-sm font-bold text-gold">
-                          {review.name.split(" ").map(n => n[0]).join("")}
+                          {review.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
                         </div>
                         <div>
                           <div className="flex flex-wrap items-center gap-2">
-                            <span className="font-serif text-base font-semibold text-cream">{review.name}</span>
+                            <span className="font-serif text-base font-semibold text-cream">
+                              {review.name}
+                            </span>
                             {review.verified && (
                               <span className="inline-flex items-center gap-1 rounded-full bg-gold/10 border border-gold/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-gold">
                                 <Check className="h-2.5 w-2.5" /> Verified Buyer
                               </span>
                             )}
                           </div>
-                          
+
                           {/* Stars row */}
                           <div className="mt-1 flex items-center gap-0.5">
                             {[1, 2, 3, 4, 5].map((star) => (
                               <Star
                                 key={star}
                                 className={`h-3.5 w-3.5 ${
-                                  star <= review.rating
-                                    ? "fill-gold text-gold"
-                                    : "text-gold/10"
+                                  star <= review.rating ? "fill-gold text-gold" : "text-gold/10"
                                 }`}
                               />
                             ))}
-                            <span className="ml-2 text-[11px] text-cream-muted/50">{review.date}</span>
+                            <span className="ml-2 text-[11px] text-cream-muted/50">
+                              {review.date}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -540,7 +583,8 @@ function ReviewsSection() {
                       {/* Product Tag */}
                       <div className="sm:text-right shrink-0">
                         <span className="inline-block rounded-lg bg-ink/80 border border-gold/10 px-2.5 py-1 text-xs text-gold/80">
-                          Scent: <span className="font-semibold text-cream">{review.productName}</span>
+                          Scent:{" "}
+                          <span className="font-semibold text-cream">{review.productName}</span>
                         </span>
                       </div>
                     </div>
@@ -556,12 +600,14 @@ function ReviewsSection() {
                         onClick={() => handleLike(review.id)}
                         disabled={isLiked}
                         className={`flex items-center gap-1.5 text-xs transition-colors cursor-pointer ${
-                          isLiked 
+                          isLiked
                             ? "text-gold font-semibold"
                             : "text-cream-muted/50 hover:text-gold"
                         }`}
                       >
-                        <ThumbsUp className={`h-3.5 w-3.5 ${isLiked ? "fill-gold text-gold" : ""}`} />
+                        <ThumbsUp
+                          className={`h-3.5 w-3.5 ${isLiked ? "fill-gold text-gold" : ""}`}
+                        />
                         <span>Helpful ({review.likes})</span>
                       </button>
                     </div>
@@ -623,7 +669,7 @@ function useInView(threshold = 0.15) {
           observer.unobserve(el);
         }
       },
-      { threshold }
+      { threshold },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -695,6 +741,43 @@ function ProductCard({ p, index }: { p: Product; index: number }) {
   );
 }
 
+function FeatureCard({
+  icon: Icon,
+  title,
+  desc,
+  index,
+}: {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  title: string;
+  desc: string;
+  index: number;
+}) {
+  const { ref, isInView } = useInView();
+  return (
+    <div
+      ref={ref}
+      className={`group relative rounded-2xl border border-gold/15 bg-ink/60 p-7 text-center backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] ${
+        isInView ? "animate-fade-in-up" : "opacity-0"
+      }`}
+      style={{ animationDelay: `${index * 120}ms` }}
+    >
+      {/* Number */}
+      <span className="absolute right-4 top-4 font-serif text-5xl font-bold text-gold/5 transition group-hover:text-gold/10">
+        0{index + 1}
+      </span>
+
+      <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-gold/30 bg-gold/5 text-gold transition-all duration-300 group-hover:scale-110 group-hover:bg-gold/15 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+        <Icon className="h-6 w-6" />
+      </div>
+
+      <h3 className="font-serif text-xl font-semibold text-cream transition-colors group-hover:text-gold">
+        {title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-cream-muted/60">{desc}</p>
+    </div>
+  );
+}
+
 function SectionHeader({
   label,
   title,
@@ -710,18 +793,12 @@ function SectionHeader({
     <div ref={ref} className={`mb-14 text-center ${isInView ? "animate-fade-in-up" : "opacity-0"}`}>
       <div className="mb-4 inline-flex items-center gap-3">
         <div className="h-px w-8 bg-gold/50" />
-        <p className="text-xs font-medium uppercase tracking-[0.35em] text-gold">
-          {label}
-        </p>
+        <p className="text-xs font-medium uppercase tracking-[0.35em] text-gold">{label}</p>
         <div className="h-px w-8 bg-gold/50" />
       </div>
-      <h2 className="font-serif text-3xl font-bold text-cream sm:text-4xl lg:text-5xl">
-        {title}
-      </h2>
+      <h2 className="font-serif text-3xl font-bold text-cream sm:text-4xl lg:text-5xl">{title}</h2>
       {subtitle && (
-        <p className="mx-auto mt-4 max-w-xl text-sm text-cream-muted/80 sm:text-base">
-          {subtitle}
-        </p>
+        <p className="mx-auto mt-4 max-w-xl text-sm text-cream-muted/80 sm:text-base">{subtitle}</p>
       )}
     </div>
   );
@@ -754,9 +831,7 @@ function Index() {
       {/* ===== NAVIGATION ===== */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "border-b border-gold/15 bg-ink/90 backdrop-blur-xl"
-            : "bg-transparent"
+          scrolled ? "border-b border-gold/15 bg-ink/90 backdrop-blur-xl" : "bg-transparent"
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
@@ -805,7 +880,10 @@ function Index() {
       </header>
 
       {/* ===== HERO ===== */}
-      <section ref={heroRef} className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      <section
+        ref={heroRef}
+        className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      >
         {/* Background effects */}
         <div className="absolute inset-0">
           <div
@@ -896,9 +974,7 @@ function Index() {
               { value: "Kumasi", label: "Ghana" },
             ].map((stat, i) => (
               <div key={stat.label} className="text-center">
-                <p className="font-serif text-2xl font-bold text-gold sm:text-3xl">
-                  {stat.value}
-                </p>
+                <p className="font-serif text-2xl font-bold text-gold sm:text-3xl">{stat.value}</p>
                 <p className="mt-1 text-xs uppercase tracking-[0.2em] text-cream-muted/50">
                   {stat.label}
                 </p>
@@ -1012,9 +1088,7 @@ function Index() {
             <div className="mb-8 flex items-center justify-center gap-4">
               <div className="h-px flex-1 max-w-24 bg-gold/30" />
               <Leaf className="h-5 w-5 text-gold/60" />
-              <h3 className="font-serif text-xl font-semibold text-gold sm:text-2xl">
-                Body Mists
-              </h3>
+              <h3 className="font-serif text-xl font-semibold text-gold sm:text-2xl">Body Mists</h3>
               <span className="rounded-full border border-gold/30 bg-gold/10 px-3 py-0.5 text-xs font-bold text-gold">
                 GH₵160
               </span>
@@ -1094,35 +1168,9 @@ function Index() {
                 title: "Made in UAE",
                 desc: "Authentic Middle Eastern artistry bottled with modern sophistication.",
               },
-            ].map(({ icon: Icon, title, desc }, i) => {
-              const { ref, isInView } = useInView();
-              return (
-                <div
-                  key={title}
-                  ref={ref}
-                  className={`group relative rounded-2xl border border-gold/15 bg-ink/60 p-7 text-center backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] ${
-                    isInView ? "animate-fade-in-up" : "opacity-0"
-                  }`}
-                  style={{ animationDelay: `${i * 120}ms` }}
-                >
-                  {/* Number */}
-                  <span className="absolute right-4 top-4 font-serif text-5xl font-bold text-gold/5 transition group-hover:text-gold/10">
-                    0{i + 1}
-                  </span>
-
-                  <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-gold/30 bg-gold/5 text-gold transition-all duration-300 group-hover:scale-110 group-hover:bg-gold/15 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                    <Icon className="h-6 w-6" />
-                  </div>
-
-                  <h3 className="font-serif text-xl font-semibold text-cream transition-colors group-hover:text-gold">
-                    {title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-cream-muted/60">
-                    {desc}
-                  </p>
-                </div>
-              );
-            })}
+            ].map(({ icon, title, desc }, i) => (
+              <FeatureCard key={title} icon={icon} title={title} desc={desc} index={i} />
+            ))}
           </div>
         </div>
       </section>
@@ -1146,7 +1194,10 @@ function Index() {
       </section>
 
       {/* ===== FOOTER / CONTACT ===== */}
-      <footer id="contact" className="relative overflow-hidden border-t border-gold/10 bg-charcoal py-20">
+      <footer
+        id="contact"
+        className="relative overflow-hidden border-t border-gold/10 bg-charcoal py-20"
+      >
         <div
           className="absolute bottom-0 left-1/2 h-[400px] w-[600px] -translate-x-1/2 translate-y-1/2 opacity-10"
           style={{
