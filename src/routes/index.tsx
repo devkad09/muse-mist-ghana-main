@@ -699,11 +699,19 @@ function ProductCard({ p, index }: { p: Product; index: number }) {
       {/* Image / Placeholder */}
       <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl border border-gold/30 bg-gradient-to-br from-charcoal via-ink to-black transition-all duration-500 group-hover:border-gold/60">
         {p.image ? (
-          <img
-            src={p.image}
-            alt={p.name}
-            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
-          />
+          <div className="relative h-full w-full">
+            <img
+              src={p.image}
+              alt={p.name}
+              className="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
+            />
+            {/* Elegant luxury vignette overlay system to elevate background to premium quality */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(10,10,10,0.9)_100%)] pointer-events-none mix-blend-multiply transition-opacity duration-500 group-hover:opacity-95" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-gold/5 pointer-events-none transition-all duration-500 group-hover:to-gold/10" />
+            <div className="absolute inset-0 bg-gold/5 mix-blend-color pointer-events-none" />
+            {/* Ambient luxury light leak */}
+            <div className="absolute -inset-10 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.15)_0%,transparent_60%)] pointer-events-none transition-transform duration-700 group-hover:translate-x-2 group-hover:translate-y-2" />
+          </div>
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
             <div className="flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gold/5 transition-all duration-500 group-hover:scale-110 group-hover:border-gold/50 group-hover:bg-gold/10">
