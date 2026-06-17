@@ -396,10 +396,10 @@ function ReviewsSection() {
 
           {/* Inline Form */}
           {isFormOpen && (
-            <div className="rounded-2xl border border-gold/30 bg-gradient-to-b from-charcoal to-ink p-6 transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.5)] animate-scale-in">
+            <div className="rounded-2xl border border-gold/30 bg-gradient-to-b from-charcoal to-ink p-6 transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
               {formSuccess ? (
-                <div className="flex flex-col items-center justify-center py-8 text-center animate-fade-in-up">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gold/15 text-gold border border-gold/40 animate-bounce">
+                <div className="flex flex-col items-center justify-center py-8 text-center">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gold/15 text-gold border border-gold/40">
                     <CheckCircle className="h-8 w-8" />
                   </div>
                   <h5 className="font-serif text-xl font-bold text-gold">Review Submitted!</h5>
@@ -530,7 +530,7 @@ function ReviewsSection() {
           {/* List of Reviews */}
           <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 scrollbar-thin">
             {filteredReviews.length === 0 ? (
-              <div className="rounded-2xl border border-gold/15 bg-charcoal/20 py-16 text-center animate-scale-in">
+              <div className="rounded-2xl border border-gold/15 bg-charcoal/20 py-16 text-center">
                 <Star className="mx-auto h-8 w-8 text-gold/20" />
                 <p className="mt-4 text-cream-muted/50">No reviews found matching this filter.</p>
               </div>
@@ -540,7 +540,7 @@ function ReviewsSection() {
                 return (
                   <div
                     key={review.id}
-                    className="group rounded-2xl border border-gold/15 bg-charcoal/20 p-5 transition-all duration-300 hover:border-gold/45 hover:bg-charcoal/30 animate-scale-in"
+                    className="group rounded-2xl border border-gold/15 bg-charcoal/20 p-5 transition-all duration-300 hover:border-gold/45 hover:bg-charcoal/30"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                       {/* Avatar & Info */}
@@ -655,39 +655,10 @@ function generalWaLink() {
   return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
 }
 
-function useInView(threshold = 0.15) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isInView, setIsInView] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.unobserve(el);
-        }
-      },
-      { threshold },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold]);
-
-  return { ref, isInView };
-}
-
-function ProductCard({ p, index }: { p: Product; index: number }) {
-  const { ref, isInView } = useInView(0.1);
-
+function ProductCard({ p }: { p: Product; index?: number }) {
   return (
     <div
-      ref={ref}
-      className={`group relative flex flex-col rounded-2xl border border-gold/20 bg-gradient-to-b from-charcoal to-ink p-4 transition-all duration-500 hover:-translate-y-3 hover:border-gold/60 hover:shadow-[0_0_50px_rgba(212,175,55,0.25)] ${
-        isInView ? "animate-fade-in-up" : "opacity-0"
-      }`}
-      style={{ animationDelay: `${index * 80}ms` }}
+      className="group relative flex flex-col rounded-2xl border border-gold/20 bg-gradient-to-b from-charcoal to-ink p-4 transition-all duration-500 hover:-translate-y-3 hover:border-gold/60 hover:shadow-[0_0_50px_rgba(212,175,55,0.25)]"
     >
       {/* Badge */}
       {p.badge && (
@@ -760,14 +731,9 @@ function FeatureCard({
   desc: string;
   index: number;
 }) {
-  const { ref, isInView } = useInView();
   return (
     <div
-      ref={ref}
-      className={`group relative rounded-2xl border border-gold/15 bg-ink/60 p-7 text-center backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] ${
-        isInView ? "animate-fade-in-up" : "opacity-0"
-      }`}
-      style={{ animationDelay: `${index * 120}ms` }}
+      className="group relative rounded-2xl border border-gold/15 bg-ink/60 p-7 text-center backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-gold/40 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)]"
     >
       {/* Number */}
       <span className="absolute right-4 top-4 font-serif text-5xl font-bold text-gold/5 transition group-hover:text-gold/10">
@@ -795,10 +761,8 @@ function SectionHeader({
   title: string;
   subtitle?: string;
 }) {
-  const { ref, isInView } = useInView();
-
   return (
-    <div ref={ref} className={`mb-14 text-center ${isInView ? "animate-fade-in-up" : "opacity-0"}`}>
+    <div className="mb-14 text-center">
       <div className="mb-4 inline-flex items-center gap-3">
         <div className="h-px w-8 bg-gold/50" />
         <p className="text-xs font-medium uppercase tracking-[0.35em] text-gold">{label}</p>
@@ -905,14 +869,14 @@ function Index() {
         </div>
 
         {/* Floating decorative elements */}
-        <div className="absolute left-[10%] top-[20%] h-2 w-2 rounded-full bg-gold/40 animate-float" />
-        <div className="absolute right-[15%] top-[30%] h-1.5 w-1.5 rounded-full bg-gold/30 animate-float delay-300" />
-        <div className="absolute left-[20%] bottom-[25%] h-1 w-1 rounded-full bg-gold/25 animate-float delay-500" />
-        <div className="absolute right-[25%] bottom-[30%] h-2 w-2 rounded-full bg-gold/20 animate-float delay-700" />
+        <div className="absolute left-[10%] top-[20%] h-2 w-2 rounded-full bg-gold/40" />
+        <div className="absolute right-[15%] top-[30%] h-1.5 w-1.5 rounded-full bg-gold/30" />
+        <div className="absolute left-[20%] bottom-[25%] h-1 w-1 rounded-full bg-gold/25" />
+        <div className="absolute right-[25%] bottom-[30%] h-2 w-2 rounded-full bg-gold/20" />
 
         <div className="relative mx-auto max-w-5xl px-6 py-32 text-center">
           {/* Top label */}
-          <div className="animate-fade-in-up mb-6 inline-flex items-center gap-3 rounded-full border border-gold/20 bg-gold/5 px-5 py-2">
+          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-gold/20 bg-gold/5 px-5 py-2">
             <Star className="h-3.5 w-3.5 text-gold" />
             <span className="text-xs font-medium uppercase tracking-[0.3em] text-gold">
               Luxury Fragrances
@@ -921,34 +885,34 @@ function Index() {
           </div>
 
           {/* Main title */}
-          <h1 className="animate-fade-in-up delay-100 font-serif text-7xl font-bold leading-[0.9] tracking-tight text-cream sm:text-8xl lg:text-9xl">
+          <h1 className="font-serif text-7xl font-bold leading-[0.9] tracking-tight text-cream sm:text-8xl lg:text-9xl">
             M<span className="text-gold-gradient">&amp;</span>M
           </h1>
 
-          <p className="animate-fade-in-up delay-200 mt-4 font-serif text-2xl italic text-cream/80 sm:text-3xl lg:text-4xl">
+          <p className="mt-4 font-serif text-2xl italic text-cream/80 sm:text-3xl lg:text-4xl">
             Mist &amp; Muse
           </p>
 
           {/* Divider */}
-          <div className="animate-fade-in-up delay-300 mx-auto my-8 flex items-center justify-center gap-4">
+          <div className="mx-auto my-8 flex items-center justify-center gap-4">
             <div className="h-px w-16 bg-gold/40" />
             <Sparkles className="h-4 w-4 text-gold/60" />
             <div className="h-px w-16 bg-gold/40" />
           </div>
 
           {/* Tagline */}
-          <p className="animate-fade-in-up delay-400 font-serif text-3xl font-medium tracking-wide text-gold sm:text-4xl lg:text-5xl">
+          <p className="font-serif text-3xl font-medium tracking-wide text-gold sm:text-4xl lg:text-5xl">
             Wear Confidence
           </p>
 
           {/* Description */}
-          <p className="animate-fade-in-up delay-500 mx-auto mt-8 max-w-2xl text-base leading-relaxed text-cream-muted/70 sm:text-lg">
+          <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-cream-muted/70 sm:text-lg">
             Discover a curated collection of premium perfumes and body mists crafted in the UAE.
             Long-lasting elegance, affordable luxury — delivered with love from Kumasi, Ghana.
           </p>
 
           {/* CTA */}
-          <div className="animate-fade-in-up delay-600 mt-10">
+          <div className="mt-10">
             <button
               onClick={scrollToProducts}
               className="group inline-flex items-center gap-3 rounded-full bg-gold px-10 py-4 text-sm font-bold uppercase tracking-widest text-ink shadow-[0_0_40px_rgba(212,175,55,0.3)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(212,175,55,0.5)]"
@@ -959,13 +923,13 @@ function Index() {
           </div>
 
           {/* Scroll indicator */}
-          <div className="animate-fade-in-up delay-700 mt-16">
+          <div className="mt-16">
             <button
               onClick={scrollToProducts}
               className="inline-flex flex-col items-center gap-2 text-cream-muted/40 transition hover:text-gold/60"
             >
               <span className="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
-              <ArrowDown className="h-4 w-4 animate-bounce" />
+              <ArrowDown className="h-4 w-4" />
             </button>
           </div>
         </div>
@@ -1011,9 +975,6 @@ function Index() {
                   : "text-cream-muted/60 hover:text-gold"
               }`}
             >
-              {tab === "perfumes" && (
-                <span className="absolute inset-0 rounded-full animate-glow-pulse" />
-              )}
               <span className="relative z-10">Perfumes (Clones)</span>
             </button>
             <button
@@ -1024,9 +985,6 @@ function Index() {
                   : "text-cream-muted/60 hover:text-gold"
               }`}
             >
-              {tab === "mists" && (
-                <span className="absolute inset-0 rounded-full animate-glow-pulse" />
-              )}
               <span className="relative z-10">Body Mists</span>
             </button>
             <button
@@ -1037,9 +995,6 @@ function Index() {
                   : "text-cream-muted/60 hover:text-gold"
               }`}
             >
-              {tab === "designers" && (
-                <span className="absolute inset-0 rounded-full animate-glow-pulse" />
-              )}
               <span className="relative z-10">Designer Imports</span>
             </button>
           </div>
@@ -1188,9 +1143,7 @@ function Index() {
 
       {/* ===== TESTIMONIAL STRIP ===== */}
       <section className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <div className="animate-shimmer">
-          <Sparkles className="mx-auto mb-4 h-6 w-6 text-gold/40" />
-        </div>
+        <Sparkles className="mx-auto mb-4 h-6 w-6 text-gold/40" />
         <blockquote className="font-serif text-xl italic text-cream/80 sm:text-2xl lg:text-3xl">
           "A fragrance is like a signature — invisible but unforgettable."
         </blockquote>
