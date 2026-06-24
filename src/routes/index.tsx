@@ -44,8 +44,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const PHONE = "233548351786";
-const DISPLAY_PHONE = "0548351786";
+const PHONE = "233551088358";
+const DISPLAY_PHONE = "0551088358";
 
 type Product = { name: string; price: number; badge?: string; image?: string };
 
